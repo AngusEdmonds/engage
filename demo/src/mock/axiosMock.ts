@@ -1,17 +1,12 @@
-import BaseService from '@/services/BaseService'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import prospectsData from '@/mock/data/prospectsData'
 
-// 🚀 Confirm mock is active
+// ✅ Add console log so you know mock is working
 console.log('✅ MockAdapter initialising')
 
 // === Adapters ===
-// Mock for BaseService (used by ProspectService)
-const mockBase = new MockAdapter(BaseService, { delayResponse: 500 })
-
-// Mock for global axios (used by AuthService and fallback)
-const mockGlobal = new MockAdapter((axios as any).default || axios, { delayResponse: 500 })
+const mockBase = new MockAdapter(axios, { delayResponse: 500 })
 
 // === Prospects ===
 mockBase.onPost('/prospects/list').reply(200, {
@@ -32,7 +27,18 @@ mockBase.onPut('/prospects/update').reply(200, {
     success: true,
 })
 
-// === Dashboard ===
+// === Project Dashboard (✅ FIXED) ===
+mockBase.onGet('/project/dashboard').reply(200, {
+    projectCount: 4,
+    activeProjects: 2,
+    archivedProjects: 1,
+    recentActivity: [
+        { id: 1, title: 'Created new project: Engage Beta', date: '2025-06-15' },
+        { id: 2, title: 'Archived: Solar Outreach v1', date: '2025-06-14' },
+    ],
+})
+
+// === Dashboard (Elstar default) ===
 mockBase.onGet('/dashboard/analytic').reply(200, {
     sales: 5000,
     orders: 250,
@@ -66,7 +72,7 @@ mockBase.onGet('/notification/count').reply(200, {
 })
 
 // === Auth ===
-mockGlobal.onPost(/\/auth\/login$/).reply(200, {
+mockBase.onPost(/\/auth\/login$/).reply(200, {
     token: 'mocked-token-123',
     user: {
         userName: 'admin',
@@ -77,7 +83,7 @@ mockGlobal.onPost(/\/auth\/login$/).reply(200, {
     },
 })
 
-mockGlobal.onPost('/sign-in').reply(200, {
+mockBase.onPost('/sign-in').reply(200, {
     token: 'mocked-token-123',
     user: {
         userName: 'admin',
@@ -88,20 +94,7 @@ mockGlobal.onPost('/sign-in').reply(200, {
     },
 })
 
-mockBase.onPost('/sales/dashboard').reply(200, {
-    summary: {
-        leads: 120,
-        converted: 35,
-        pending: 15,
-        revenue: 18500,
-    },
-})
-
-// === Fallbacks ===
-mockBase.onGet(new RegExp('^/dashboard/.*')).reply(200, {
-    message: 'Mocked dashboard fallback',
-})
-
+// === CRM fallback mock ===
 mockBase.onGet(new RegExp('^/crm/.*')).reply(200, {
     message: 'Mocked CRM GET fallback',
 })
@@ -110,11 +103,10 @@ mockBase.onPost(new RegExp('^/crm/.*')).reply(200, {
     message: 'Mocked CRM POST fallback',
 })
 
-// === Final fallback to catch anything else
+// === Fallback for unmatched routes
 mockBase.onAny().reply((config) => {
     console.log('❌ Unmatched request in Mock:', config.method, config.url)
     return [404, { message: 'Mock fallback 404' }]
 })
 
-// ✅ Export
 export default mockBase
