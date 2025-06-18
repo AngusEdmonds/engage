@@ -1,6 +1,6 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import prospectsData from '@/mock/data/prospectsData'
+import prospectsData from './data/prospectsData'
 
 // ✅ Add console log so you know mock is working
 console.log('✅ MockAdapter initialising')
