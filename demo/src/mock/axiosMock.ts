@@ -9,18 +9,18 @@ console.log('✅ MockAdapter initialising')
 const mockBase = new MockAdapter(axios, { delayResponse: 500 })
 
 // === Prospects ===
-mockBase.onPost('/prospects/list').reply(200, {
-    data: prospectsData,
-    total: prospectsData.length,
+mockBase.onPost('/api/prospects/list').reply(200, {
+  data: prospectsData,
+  total: prospectsData.length,
 })
 
-mockBase.onGet('/prospects/statistics').reply(200, {
-    totalProspects: { value: prospectsData.length, growShrink: 5 },
-    activeProspects: {
-        value: prospectsData.filter((p) => p.status === 'active').length,
-        growShrink: 10,
-    },
-    newProspects: { value: 1, growShrink: 15 },
+mockBase.onGet('/api/prospects/statistics').reply(200, {
+  totalProspects: { value: prospectsData.length, growShrink: 5 },
+  activeProspects: {
+    value: prospectsData.filter((p) => p.status === 'active').length,
+    growShrink: 10,
+  },
+  newProspects: { value: 1, growShrink: 15 },
 })
 
 mockBase.onPut('/prospects/update').reply(200, {
