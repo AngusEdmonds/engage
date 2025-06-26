@@ -61,12 +61,6 @@ const AccessDenied = lazy(() => import('@/views/pages/AccessDenied'))
 
 const appRoutes = [
     {
-    key: 'signIn',
-    path: '/sign-in',
-    component: lazy(() => import('@/views/auth/SignIn')), // Ensure file exists
-    authority: [],
-},
-    {
         path: '/',
         element: <Navigate to="/app/project/dashboard" replace />
     },
