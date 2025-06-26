@@ -1,4 +1,4 @@
-import protectedRoutes from '@/routes/protectedRoutes'
+import protectedRoutes from '@/routes/appRoutes'
 import { Suspense } from 'react'
 import Loading from '@/components/shared/Loading'
 import appConfig from '@/configs/app.config'
@@ -8,7 +8,6 @@ import { useAppSelector } from '@/store'
 import ProtectedRoute from '@/components/route/ProtectedRoute'
 import PublicRoute from '@/components/route/PublicRoute'
 import AuthorityGuard from '@/components/route/AuthorityGuard'
-import AppRoute from '@/components/route/AppRoute'
 import type { LayoutType } from '@/@types/theme'
 
 interface ViewsProps {
