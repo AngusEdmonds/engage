@@ -1,51 +1,39 @@
 import { useEffect } from 'react'
-import Loading from '@/components/shared/Loading'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { getSalesDashboardData } from '@/store/salesDashboardSlice'
 import Statistic from './Statistic'
+import TopProduct from './TopProduct'
 import SalesReport from './SalesReport'
 import SalesByCategories from './SalesByCategories'
 import LatestOrder from './LatestOrder'
-import TopProduct from './TopProduct'
-import { getSalesDashboardData, useAppSelector } from '../store'
-import { useAppDispatch } from '@/store'
 
 const SalesDashboardBody = () => {
     const dispatch = useAppDispatch()
-
-    const dashboardData = useAppSelector(
-        (state) => state.salesDashboard.data.dashboardData,
-    )
-
-    const loading = useAppSelector((state) => state.salesDashboard.data.loading)
+    const data = useAppSelector((state) => state.crmSalesDashboard.data)
+    const loading = useAppSelector((state) => state.crmSalesDashboard.loading)
 
     useEffect(() => {
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const fetchData = () => {
         dispatch(getSalesDashboardData())
+    }, [dispatch])
+
+    if (loading || !data) {
+        return <div className="p-6">Loading dashboard...</div>
     }
 
+    const statistics = data.statistics ?? []
+    const topProducts = data.topProduct ?? []
+    const salesReport = data.salesReport ?? []
+    const categories = data.salesByCategories ?? []
+    const latestOrders = data.latestOrder ?? []
+
     return (
-        <Loading loading={loading}>
-            <Statistic data={dashboardData?.statisticData} />
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <SalesReport
-                    data={dashboardData?.salesReportData}
-                    className="col-span-2"
-                />
-                <SalesByCategories
-                    data={dashboardData?.salesByCategoriesData}
-                />
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <LatestOrder
-                    data={dashboardData?.latestOrderData}
-                    className="lg:col-span-2"
-                />
-                <TopProduct data={dashboardData?.topProductsData} />
-            </div>
-        </Loading>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <Statistic data={statistics} />
+            <TopProduct data={topProducts} />
+            <SalesReport data={salesReport} />
+            <SalesByCategories data={categories} />
+            <LatestOrder data={latestOrders} />
+        </div>
     )
 }
 
