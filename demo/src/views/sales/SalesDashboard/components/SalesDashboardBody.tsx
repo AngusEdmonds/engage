@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { getSalesDashboardData } from '@/store/salesDashboardSlice'
+import { getSalesDashboardData } from '@/views/sales/SalesDashboard/store/salesDashboardSlice'
 import Statistic from './Statistic'
 import TopProduct from './TopProduct'
 import SalesReport from './SalesReport'
