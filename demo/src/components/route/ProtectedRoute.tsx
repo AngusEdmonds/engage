@@ -8,6 +8,8 @@ const { unAuthenticatedEntryPath } = appConfig
 const ProtectedRoute = () => {
     const { authenticated } = useAuth()
 
+    console.log('AUTH?', authenticated) // ✅ Added log line
+
     const location = useLocation()
 
     if (!authenticated) {
