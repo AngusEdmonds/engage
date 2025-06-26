@@ -9,7 +9,8 @@ import LatestOrder from './LatestOrder'
 
 const SalesDashboardBody = () => {
     const dispatch = useAppDispatch()
-    const data = useAppSelector((state) => state.crmSalesDashboard.data)
+    const data = useAppSelector((state) => state.salesDashboard?.data)
+    const loading = useAppSelector((state) => state.salesDashboard?.loading)
     const loading = useAppSelector((state) => state.crmSalesDashboard.loading)
 
     useEffect(() => {

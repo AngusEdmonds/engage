@@ -1,4 +1,6 @@
 import store from './storeSetup'
+import salesDashboardReducer from '@/views/sales/SalesDashboard/store/salesDashboardSlice'
+injectReducer('salesDashboard', salesDashboardReducer)
 
 export * from './storeSetup'
 export * from './slices/auth'
