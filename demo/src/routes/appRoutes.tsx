@@ -65,13 +65,11 @@ const appRoutes = [
         element: <Navigate to="/app/project/dashboard" replace />
     },
     {
-        path: '/sign-in',
-        element: (
-            <BlankLayout>
-                <SignIn />
-            </BlankLayout>
-        )
-    },
+    key: 'signIn',
+    path: '/sign-in',
+    component: lazy(() => import('@/views/auth/SignIn/SignIn')),
+    authority: [],
+}
     {
         path: '/sign-up',
         element: (
