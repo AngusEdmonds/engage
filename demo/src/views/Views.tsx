@@ -1,3 +1,4 @@
+import protectedRoutes from '@/routes/protectedRoutes'
 import { Suspense } from 'react'
 import Loading from '@/components/shared/Loading'
 import appConfig from '@/configs/app.config'
