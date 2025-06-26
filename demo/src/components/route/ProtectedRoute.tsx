@@ -7,12 +7,13 @@ const { unAuthenticatedEntryPath } = appConfig
 
 const ProtectedRoute = () => {
     const { authenticated } = useAuth()
-
-    console.log('AUTH?', authenticated) // ✅ Added log line
-
     const location = useLocation()
 
+    console.log('🔐 [ProtectedRoute] Authenticated:', authenticated)
+    console.log('🔐 [ProtectedRoute] Current Path:', location.pathname)
+
     if (!authenticated) {
+        console.log(`🔐 [ProtectedRoute] Redirecting to ${unAuthenticatedEntryPath}`)
         return (
             <Navigate
                 replace

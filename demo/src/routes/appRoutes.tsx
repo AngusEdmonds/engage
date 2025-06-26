@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 import ClassicLayout from '@/components/layouts/ClassicLayout'
 import BlankLayout from '@/components/layouts/BlankLayout'
+import SignIn from '@/views/auth/SignIn'
 
 // Auth
 const SignIn = lazy(() => import('@/views/auth/SignIn'))
@@ -59,6 +60,12 @@ const Welcome = lazy(() => import('@/views/pages/Welcome'))
 const AccessDenied = lazy(() => import('@/views/pages/AccessDenied'))
 
 const appRoutes = [
+    {
+    key: 'signIn',
+    path: '/sign-in',
+    component: lazy(() => import('@/views/auth/SignIn')), // Ensure file exists
+    authority: [],
+},
     {
         path: '/',
         element: <Navigate to="/app/project/dashboard" replace />
