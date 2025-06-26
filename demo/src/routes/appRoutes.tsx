@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 import ClassicLayout from '@/components/layouts/ClassicLayout'
 import BlankLayout from '@/components/layouts/BlankLayout'
-import SignIn from '@/views/auth/SignIn'
+import SignIn from '@/views/auth/SignIn/SignIn'
 
 // Auth
 const SignIn = lazy(() => import('@/views/auth/SignIn'))
