@@ -172,7 +172,7 @@ const customMenu = [
 const navigationConfig: NavigationTree[] = [
     {
         key: 'homeDashboard',
-        path: '/home/dashboard',
+        path: '/app/project/dashboard',
         title: 'Dashboard',
         icon: MdDashboard,
         breadcrumb: false,

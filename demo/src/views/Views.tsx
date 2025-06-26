@@ -9,6 +9,7 @@ import ProtectedRoute from '@/components/route/ProtectedRoute'
 import PublicRoute from '@/components/route/PublicRoute'
 import AuthorityGuard from '@/components/route/AuthorityGuard'
 import type { LayoutType } from '@/@types/theme'
+import AppRoute from '@/components/route/AppRoute'
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
