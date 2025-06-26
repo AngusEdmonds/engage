@@ -5,7 +5,6 @@ import BlankLayout from '@/components/layouts/BlankLayout'
 import SignIn from '@/views/auth/SignIn/SignIn'
 
 // Auth
-const SignIn = lazy(() => import('@/views/auth/SignIn/SignIn'))
 const SignUp = lazy(() => import('@/views/auth/SignUp/SignUp'))
 const ForgotPassword = lazy(() => import('@/views/auth/ForgotPassword/ForgotPassword'))
 const ResetPassword = lazy(() => import('@/views/auth/ResetPassword/ResetPassword'))
@@ -70,8 +69,8 @@ const appRoutes = [
         <BlankLayout>
             <SignIn />
         </BlankLayout>
-    )
-}
+        )
+    },
     {
         path: '/sign-up',
         element: (
