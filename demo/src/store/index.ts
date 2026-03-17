@@ -1,4 +1,4 @@
-import store from './storeSetup'
+import store, { injectReducer } from './storeSetup'
 import salesDashboardReducer from '@/views/sales/SalesDashboard/store/salesDashboardSlice'
 injectReducer('salesDashboard', salesDashboardReducer)
 
