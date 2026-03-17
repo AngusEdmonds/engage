@@ -6,14 +6,18 @@ import './index.css'
 
 import appConfig from '@/configs/app.config'
 
+async function bootstrap() {
 // ✅ Attach axiosMock synchronously BEFORE React starts
-if (appConfig.enableMock) {
-    console.log('✅ enableMock is TRUE — loading axiosMock.ts')
-    import('@/mock/axiosMock')
+    if (appConfig.enableMock) {
+        console.log('✅ enableMock is TRUE — loading axiosMock.ts')
+        import('@/mock/axiosMock')
+    }
+
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+    )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-)
+bootstrap()

@@ -28,7 +28,7 @@ const AllProspects = () => {
             query,
             filterData,
         })
-        dispatch(getProspects({ pageIndex, pageSize, sort, query, filterData }))
+
     }, [dispatch, pageIndex, pageSize, sort, query, filterData])
 
     return (
