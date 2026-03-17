@@ -1,6 +1,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import prospectsData from '@/mock/data/prospectsData'
+import { projectDashboardData } from '@/mock/data/projectData'
 import BaseService from '@/services/BaseService'
 
 console.log('✅ enableMock is TRUE — loading axiosMock.ts')
@@ -10,7 +11,7 @@ const mockBase = new MockAdapter(BaseService, { delayResponse: 500 })
 console.log('✅ MockAdapter initialising')
 
 // === Prospects ===
-mockBase.onPost('/api/prospects/list').reply((config) => {
+mockBase.onPost('/prospects/list').reply((config) => {
     try {
         return [200, {
             data: prospectsData,
@@ -22,7 +23,7 @@ mockBase.onPost('/api/prospects/list').reply((config) => {
     }
 })
 
-mockBase.onGet('/api/prospects/statistics').reply((config) => {
+mockBase.onGet('/prospects/statistics').reply((config) => {
     try {
         const total = prospectsData.length
         const active = prospectsData.filter(p => p.status === 'active').length
@@ -38,14 +39,12 @@ mockBase.onGet('/api/prospects/statistics').reply((config) => {
 })
 
 // === Dashboard ===
-mockBase.onGet('/api/project/dashboard').reply(200, {
-    revenue: 8000,
-    activeUsers: 320,
-    bounceRate: 47.5,
+mockBase.onGet('/project/dashboard').reply(200, {
+    ...projectDashboardData,
 })
 
 // === Notifications ===
-mockBase.onGet('/api/notification/count').reply(200, {
+mockBase.onGet('/notification/count').reply(200, {
     count: 3,
 })
 
