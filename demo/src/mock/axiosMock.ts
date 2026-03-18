@@ -1,4 +1,3 @@
-import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import prospectsData from '@/mock/data/prospectsData'
 import { projectDashboardData } from '@/mock/data/projectData'
@@ -7,7 +6,10 @@ import BaseService from '@/services/BaseService'
 console.log('✅ enableMock is TRUE — loading axiosMock.ts')
 console.log('✅ prospectsData loaded:', Array.isArray(prospectsData) ? prospectsData.length : 'invalid')
 
-const mockBase = new MockAdapter(BaseService, { delayResponse: 500 })
+const mockBase = new MockAdapter(BaseService, {
+    delayResponse: 500,
+    onNoMatch: 'passthrough',
+})
 console.log('✅ MockAdapter initialising')
 
 // === Prospects ===
@@ -46,12 +48,6 @@ mockBase.onGet('/project/dashboard').reply(200, {
 // === Notifications ===
 mockBase.onGet('/notification/count').reply(200, {
     count: 3,
-})
-
-// === Catch-all fallback
-mockBase.onAny().reply((config) => {
-    console.error('❌ Unmatched request in Mock:', config.method, config.url)
-    return [404, { message: 'Mock fallback 404' }]
 })
 
 export default mockBase
