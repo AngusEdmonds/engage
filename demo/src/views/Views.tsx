@@ -1,4 +1,3 @@
-import protectedRoutes from '@/routes/appRoutes'
 import { Suspense } from 'react'
 import Loading from '@/components/shared/Loading'
 import appConfig from '@/configs/app.config'
@@ -10,6 +9,8 @@ import PublicRoute from '@/components/route/PublicRoute'
 import AuthorityGuard from '@/components/route/AuthorityGuard'
 import type { LayoutType } from '@/@types/theme'
 import AppRoute from '@/components/route/AppRoute'
+import { protectedRoutes, publicRoutes } from '@/configs/routes.config'
+import useAuth from '@/utils/hooks/useAuth'
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -18,22 +19,23 @@ interface ViewsProps {
 
 type AllRoutesProps = ViewsProps
 
-const { authenticatedEntryPath } = appConfig
+const { authenticatedEntryPath, unAuthenticatedEntryPath } = appConfig
 
 const AllRoutes = (props: AllRoutesProps) => {
     const userAuthority = useAppSelector((state) => state.auth.user.authority)
+    const { authenticated } = useAuth()
 
     return (
         <Routes>
-            <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/app" element={<ProtectedRoute />}>
                 <Route
-                    path="/"
+                    index
                     element={<Navigate replace to={authenticatedEntryPath} />}
                 />
                 {protectedRoutes.map((route, index) => (
                     <Route
                         key={route.key + index}
-                        path={route.path}
+                        path={route.path.replace(/^\//, '')}
                         element={
                             <AuthorityGuard
                                 userAuthority={userAuthority}
@@ -50,9 +52,25 @@ const AllRoutes = (props: AllRoutesProps) => {
                         }
                     />
                 ))}
-                <Route path="*" element={<Navigate replace to="/" />} />
+                <Route
+                    path="*"
+                    element={<Navigate replace to={authenticatedEntryPath} />}
+                />
             </Route>
             <Route path="/" element={<PublicRoute />}>
+                <Route
+                    index
+                    element={
+                        <Navigate
+                            replace
+                            to={
+                                authenticated
+                                    ? authenticatedEntryPath
+                                    : unAuthenticatedEntryPath
+                            }
+                        />
+                    }
+                />
                 {publicRoutes.map((route) => (
                     <Route
                         key={route.path}

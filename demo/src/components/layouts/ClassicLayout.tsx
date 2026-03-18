@@ -7,7 +7,7 @@ import SidePanel from '@/components/template/SidePanel'
 import MobileNav from '@/components/template/MobileNav'
 import UserDropdown from '@/components/template/UserDropdown'
 import SideNav from '@/components/template/SideNav'
-import { Outlet } from 'react-router-dom' // ✅ Add this
+import View from '@/views'
 
 const HeaderActionsStart = () => {
     return (
@@ -42,7 +42,7 @@ const ClassicLayout = () => {
                         headerEnd={<HeaderActionsEnd />}
                     />
                     <div className="h-full flex flex-auto flex-col">
-                        <Outlet /> {/* ✅ This is what renders your actual routes */}
+                        <View />
                     </div>
                 </div>
             </div>

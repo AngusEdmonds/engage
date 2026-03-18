@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import appConfig from '@/configs/app.config'
 import useAuth from '@/utils/hooks/useAuth'
 
@@ -6,8 +6,14 @@ const { authenticatedEntryPath } = appConfig
 
 const PublicRoute = () => {
     const { authenticated } = useAuth()
+    const location = useLocation()
+    const isPublicAllowedWhenAuthed = location.pathname.startsWith('/ui-components')
 
-    return authenticated ? <Navigate to={authenticatedEntryPath} /> : <Outlet />
+    if (authenticated && !isPublicAllowedWhenAuthed) {
+        return <Navigate to={authenticatedEntryPath} />
+    }
+
+    return <Outlet />
 }
 
 export default PublicRoute
