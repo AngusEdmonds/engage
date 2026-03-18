@@ -18,9 +18,11 @@ const SalesDashboardHeader = () => {
     const dispatch = useAppDispatch()
 
     const startDate = useAppSelector(
-        (state) => state.salesDashboard.data.startDate,
+        (state) => state.salesDashboard?.data?.startDate ?? dayjs().unix(),
     )
-    const endDate = useAppSelector((state) => state.salesDashboard.data.endDate)
+    const endDate = useAppSelector(
+        (state) => state.salesDashboard?.data?.endDate ?? dayjs().unix(),
+    )
 
     const handleDateChange = (value: [Date | null, Date | null]) => {
         dispatch(setStartDate(dayjs(value[0]).unix()))

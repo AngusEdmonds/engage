@@ -11,24 +11,26 @@ import LatestOrder from './LatestOrder'
 const SalesDashboardBody = () => {
     const dispatch = useAppDispatch()
 
-    const data = useAppSelector((state) => state.salesDashboard?.data)
-    const loading = useAppSelector((state) => state.salesDashboard?.loading)
+    const dashboardData = useAppSelector(
+        (state) => state.salesDashboard?.data?.dashboardData,
+    )
+    const loading = useAppSelector((state) => state.salesDashboard?.data?.loading)
 
     useEffect(() => {
         dispatch(getSalesDashboardData())
     }, [dispatch])
 
-    if (loading || !data) {
+    if (loading || !dashboardData) {
         return <div className="p-6">Loading dashboard...</div>
     }
 
     return (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <Statistic data={data.statistics ?? []} />
-            <TopProduct data={data.topProduct ?? []} />
-            <SalesReport data={data.salesReport ?? []} />
-            <SalesByCategories data={data.salesByCategories ?? []} />
-            <LatestOrder data={data.latestOrder ?? []} />
+            <Statistic data={dashboardData.statisticData} />
+            <TopProduct data={dashboardData.topProductsData} />
+            <SalesReport data={dashboardData.salesReportData} />
+            <SalesByCategories data={dashboardData.salesByCategoriesData} />
+            <LatestOrder data={dashboardData.latestOrderData} />
         </div>
     )
 }

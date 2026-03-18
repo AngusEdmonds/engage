@@ -65,7 +65,7 @@ const StatisticCard = ({
 
 const Statistic = ({ data = {} }: StatisticProps) => {
     const startDate = useAppSelector(
-        (state) => state.salesDashboard.data.startDate,
+        (state) => state.salesDashboard?.data?.startDate ?? dayjs().unix(),
     )
 
     return (
