@@ -34,6 +34,114 @@ export const publicRoutes: Routes = [
         component: lazy(() => import('@/views/ui-components/UiComponentsRouter')),
         authority: [],
     },
+    {
+        key: 'pagesWelcome',
+        path: '/pages/welcome',
+        component: lazy(() => import('@/views/pages/Welcome')),
+        authority: [],
+    },
+    {
+        key: 'accessDenied',
+        path: '/access-denied',
+        component: lazy(() => import('@/views/pages/AccessDenied')),
+        authority: [],
+    },
+    {
+        key: 'signInSimple',
+        path: '/auth/sign-in-simple',
+        component: lazy(() => import('@/views/auth-demo/SignIn/SignInSimple')),
+        authority: [],
+    },
+    {
+        key: 'signInSide',
+        path: '/auth/sign-in-side',
+        component: lazy(() => import('@/views/auth-demo/SignIn/SignInSide')),
+        authority: [],
+    },
+    {
+        key: 'signInCover',
+        path: '/auth/sign-in-cover',
+        component: lazy(() => import('@/views/auth-demo/SignIn/SignInCover')),
+        authority: [],
+    },
+    {
+        key: 'signUpSimple',
+        path: '/auth/sign-up-simple',
+        component: lazy(() => import('@/views/auth-demo/SignUp/SignUpCover')),
+        authority: [],
+    },
+    {
+        key: 'signUpSide',
+        path: '/auth/sign-up-side',
+        component: lazy(() => import('@/views/auth-demo/SignUp/SignUpCover')),
+        authority: [],
+    },
+    {
+        key: 'signUpCover',
+        path: '/auth/sign-up-cover',
+        component: lazy(() => import('@/views/auth-demo/SignUp/SignUpCover')),
+        authority: [],
+    },
+    {
+        key: 'forgotPasswordSimple',
+        path: '/auth/forgot-password-simple',
+        component: lazy(() => import('@/views/auth-demo/ForgotPassword/ForgotPasswordSimple')),
+        authority: [],
+    },
+    {
+        key: 'forgotPasswordSide',
+        path: '/auth/forgot-password-side',
+        component: lazy(() => import('@/views/auth-demo/ForgotPassword/ForgotPasswordSide')),
+        authority: [],
+    },
+    {
+        key: 'forgotPasswordCover',
+        path: '/auth/forgot-password-cover',
+        component: lazy(() => import('@/views/auth-demo/ForgotPassword/ForgotPasswordCover')),
+        authority: [],
+    },
+    {
+        key: 'resetPasswordSimple',
+        path: '/auth/reset-password-simple',
+        component: lazy(() => import('@/views/auth-demo/ResetPassword/ResetPasswordSimple')),
+        authority: [],
+    },
+    {
+        key: 'resetPasswordSide',
+        path: '/auth/reset-password-side',
+        component: lazy(() => import('@/views/auth-demo/ResetPassword/ResetPasswordSide')),
+        authority: [],
+    },
+    {
+        key: 'resetPasswordCover',
+        path: '/auth/reset-password-cover',
+        component: lazy(() => import('@/views/auth-demo/ResetPassword/ResetPasswordCover')),
+        authority: [],
+    },
+    {
+        key: 'docs',
+        path: '/docs/documentation/*',
+        component: lazy(() => import('@/views/docs/Documentations/Documentations')),
+        authority: [],
+    },
+    {
+        key: 'docsSharedComponentDoc',
+        path: '/docs/shared-component-doc/*',
+        component: lazy(() => import('@/views/docs/SharedComponentsDoc')),
+        authority: [],
+    },
+    {
+        key: 'docsChangeLog',
+        path: '/docs/changelog',
+        component: lazy(() => import('@/views/docs/ChangeLog')),
+        authority: [],
+    },
+    {
+        key: 'docsUtils',
+        path: '/docs/utils-doc/*',
+        component: lazy(() => import('@/views/docs/UtilsDoc')),
+        authority: [],
+    },
 ]
 
 export const protectedRoutes: Routes = [
@@ -211,35 +319,4 @@ export const protectedRoutes: Routes = [
         component: lazy(() => import('@/views/prospects/AllProspects')),
         authority: [],
     },
-    {
-        key: 'docsDocumentation',
-        path: '/docs/documentation/*',
-        component: lazy(() => import('@/views/docs/Documentations')),
-        authority: [],
-    },
-    {
-        key: 'docsSharedComponentDoc',
-        path: '/docs/shared-component-doc/*',
-        component: lazy(() => import('@/views/docs/SharedComponentsDoc')),
-        authority: [],
-    },
-    {
-        key: 'docsChangeLog',
-        path: '/docs/changelog',
-        component: lazy(() => import('@/views/docs/ChangeLog')),
-        authority: [],
-    },
-    {
-        key: 'pagesWelcome',
-        path: '/pages/welcome',
-        component: lazy(() => import('@/views/pages/Welcome')),
-        authority: [],
-    },
-    {
-        key: 'accessDenied',
-        path: '/access-denied',
-        component: lazy(() => import('@/views/pages/AccessDenied')),
-        authority: [],
-    },
 ]
-

@@ -7,7 +7,12 @@ const { authenticatedEntryPath } = appConfig
 const PublicRoute = () => {
     const { authenticated } = useAuth()
     const location = useLocation()
-    const isPublicAllowedWhenAuthed = location.pathname.startsWith('/ui-components')
+    const isPublicAllowedWhenAuthed =
+        location.pathname.startsWith('/ui-components') ||
+        location.pathname.startsWith('/pages/') ||
+        location.pathname === '/access-denied' ||
+        location.pathname.startsWith('/auth/') ||
+        location.pathname.startsWith('/docs/')
 
     if (authenticated && !isPublicAllowedWhenAuthed) {
         return <Navigate to={authenticatedEntryPath} />
